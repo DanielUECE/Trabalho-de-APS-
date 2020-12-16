@@ -3,10 +3,10 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from config import SQLALCHEMY_DATABASE_URI
+from config import SQLALCHEMY_DATABASE_URI, DB_INFO
 import models as mod
 import pandas as pd
-from datetime import date
+from psycopg2 import connect
 
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
@@ -87,5 +87,23 @@ def simple_query(table, lim=0):
         session.query(table).limit(lim).all()
 
 
+def to_xml(name, base):
+    file = '<?xml version="1.0" encoding="utf-8"?>\n'
+    file += f'\t<{name}s>\n'
+    for i, f in base.iterrows():
+        file += f'\t\t<{name}>\n'
+        for k, v in f.to_dict().items():
+            file += f'\t\t\t<{k}>{v}<{k}>\n'
+        file += f'\t\t<{name}>\n'
+    file += f'\t<{name}s>\n'
+    print(file)
+
+
 recreate_tables()
 close_session()
+# conn = connect(host=DB_INFO['DB_ADDR'], database=DB_INFO['DB_NAME'], user=DB_INFO['DB_USER'],
+#                password=DB_INFO['DB_PASS'])
+# df = pd.read_sql_query('select * from livros', con=conn)
+#
+# to_xml('Livro', df)
+# conn.close()

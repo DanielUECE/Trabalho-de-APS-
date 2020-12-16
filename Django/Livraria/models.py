@@ -13,10 +13,10 @@ class Livro(Base):
 
     id = Column(Integer, primary_key=True)
     titulo = Column(String, nullable=False)
-    ano_publicacao_original = Column(Numeric, nullable=False)
-    edicao = Column(Numeric, nullable=False)
+    ano_publicacao_original = Column(Integer, nullable=False)
+    edicao = Column(Integer, nullable=False)
     editora = Column(String, nullable=False)
-    ano_publicacao_edicao = Column(Numeric, nullable=False)
+    ano_publicacao_edicao = Column(Integer, nullable=False)
     autores = Column(ARRAY(String), nullable=False)
     lingua_original = Column(String, nullable=False)
     lingua = Column(String, nullable=False)
@@ -25,14 +25,14 @@ class Livro(Base):
     estado_id = Column(Numeric, nullable=False)
     exemplares = Column(Numeric, default=0)
     preco = Column(Numeric(3, 2))
-    paginas = Column(Numeric)
-    classificao = Column(Numeric)
+    paginas = Column(Integer)
+    classificao = Column(Integer)
 
 
 class Usuario(Base):
     __tablename__ = 'usuario'
 
-    id = Column(Numeric, nullable=False)
+    id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
     nascimento = Column(DATE, nullable=False)
     cidade = Column(String, nullable=False)
