@@ -2,9 +2,20 @@
 # -*- coding: utf-8 -*-
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Numeric, PrimaryKeyConstraint, ARRAY, DATE
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Numeric, PrimaryKeyConstraint
+from sqlalchemy import ARRAY, DATE, PickleType, JSON, BLOB
 
 Base = declarative_base()
+
+
+class LivroFlaskTeste(Base):
+
+    __tablename__ = 'livros_flask_teste'
+
+    id = Column(Integer, primary_key=True)
+    titulo = Column(String, nullable=False)
+    preco = Column(Numeric, nullable=False)
+    autor = Column(String, nullable=False)
 
 
 class Livro(Base):
@@ -13,24 +24,48 @@ class Livro(Base):
 
     id = Column(Integer, primary_key=True)
     titulo = Column(String, nullable=False)
-    ano_publicacao_original = Column(Integer, nullable=False)
+    # ano_publicacao_original = Column(Integer, nullable=False)
     edicao = Column(Integer, nullable=False)
-    editora = Column(String, nullable=False)
+    editora_id = Column(Integer, nullable=False)
     ano_publicacao_edicao = Column(Integer, nullable=False)
     autores = Column(ARRAY(String), nullable=False)
-    idioma_original = Column(String, nullable=False)
+    # idioma_original = Column(String, nullable=False)
     idioma = Column(String, nullable=False)
-    tipo_id = Column(Numeric, nullable=False)
-    generos_id = Column(ARRAY(Numeric))
-    estado_id = Column(Numeric, nullable=False)
-    exemplares = Column(Numeric, default=0)
+    tipo_id = Column(Integer, nullable=False)
+    generos_id = Column(ARRAY(Integer))
+    categoria_id = Column(Integer)
+    estado_id = Column(Integer, nullable=False)
+    exemplares = Column(Integer, default=0)
     preco = Column(Numeric(3, 2))
     paginas = Column(Integer)
-    classificao = Column(Integer)
+    classificao = Column(Numeric, default=0.0, nullable=False)
+    capa = Column(String)
+    capa_extra1 = Column(String)
+    capa_extra2 = Column(String)
 
 
-class Usuario(Base):
-    __tablename__ = 'usuario'
+class Editora(Base):
+
+    __tablename__ = 'editoras'
+
+    id = Column(Integer, primary_key=True)
+    nome = Column(String, nullable=False)
+    cidade = Column(String, nullable=False)
+    bairro = Column(String, nullable=False)
+    endereco = Column(String, nullable=False)
+
+
+class Autor(Base):
+
+    __tablename__ = 'autores'
+
+    id = Column(Integer, primary_key=True)
+    nome = Column(String, nullable=False)
+
+
+class Cliente(Base):
+
+    __tablename__ = 'clientes'
 
     id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
@@ -39,10 +74,25 @@ class Usuario(Base):
     bairro = Column(String, nullable=False)
     endereco = Column(String, nullable=False)
     email = Column(String, nullable=False)
+    senha = Column(String, nullable=False)
+    visualizados = Column(ARRAY(Integer))
+
+
+class Administrador(Base):
+
+    __tablename__ = 'administradores'
+
+    id = Column(Integer, primary_key=True)
+    nome = Column(String, nullable=False)
+    nascimento = Column(DATE, nullable=False)
+    email = Column(String, nullable=False)
     tipo = Column(Numeric, nullable=False)
+    senha = Column(String, nullable=False)
+    nivel = Column(Integer, nullable=False)
 
 
 class Tipo(Base):
+
     __tablename__ = 'tipos'
 
     id = Column(Integer, primary_key=True)
@@ -63,3 +113,19 @@ class Estado(Base):
 
     id = Column(Integer, primary_key=True)
     estado = Column(String, nullable=False)
+
+
+class Categoria(Base):
+
+    __tablename__ = 'categorias'
+
+    id = Column(Integer, primary_key=True)
+    categoria = Column(String, nullable=False)
+
+
+class Status(Base):
+
+    __tablename__ = 'status'
+
+    id = Column(Integer, primary_key=True)
+    descricao = Column(String, nullable=False)
