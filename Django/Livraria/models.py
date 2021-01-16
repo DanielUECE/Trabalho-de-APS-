@@ -8,16 +8,6 @@ from sqlalchemy import ARRAY, DATE, PickleType, JSON, BLOB
 Base = declarative_base()
 
 
-class LivroFlaskTeste(Base):
-
-    __tablename__ = 'livros_flask_teste'
-
-    id = Column(Integer, primary_key=True)
-    titulo = Column(String, nullable=False)
-    preco = Column(Numeric, nullable=False)
-    autor = Column(String, nullable=False)
-
-
 class Livro(Base):
 
     __tablename__ = 'livros'
@@ -36,9 +26,9 @@ class Livro(Base):
     categoria_id = Column(Integer)
     estado_id = Column(Integer, nullable=False)
     exemplares = Column(Integer, default=0)
-    preco = Column(Numeric(3, 2))
+    preco = Column(Numeric(6, 2))
     paginas = Column(Integer)
-    classificao = Column(Numeric, default=0.0, nullable=False)
+    classificacao = Column(Numeric, default=0.0, nullable=False)
     capa = Column(String)
     capa_extra1 = Column(String)
     capa_extra2 = Column(String)
@@ -86,7 +76,6 @@ class Administrador(Base):
     nome = Column(String, nullable=False)
     nascimento = Column(DATE, nullable=False)
     email = Column(String, nullable=False)
-    tipo = Column(Numeric, nullable=False)
     senha = Column(String, nullable=False)
     nivel = Column(Integer, nullable=False)
 
