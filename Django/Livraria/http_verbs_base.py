@@ -1,6 +1,9 @@
-from flask import Flask, request, render_template
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from flask import request, render_template
 from psycopg2 import connect, extras
 from config import DB_INFO
+import pandas as pd
 
 
 def format_string_type(attribute):
@@ -16,8 +19,8 @@ def format_string_type(attribute):
 
 
 def get_columns(table_name):
-    conn = connect(host=DB_INFO['DB_ADDR'], database=DB_INFO['DB_NAME'],
-                   user=DB_INFO['DB_USER'], password=DB_INFO['DB_PASS'])
+    conn = connect(host=DB_INFO['host'], database=DB_INFO['database'],
+                   user=DB_INFO['user'], password=DB_INFO['password'])
     cur = conn.cursor(cursor_factory=extras.DictCursor)
     cur.execute(f'SELECT * FROM {table_name}')
     columns_names = [desc[0] for desc in cur.description]
@@ -35,25 +38,27 @@ def get_columns(table_name):
 
 
 def mapping_base(table_name, columns_names):
-    conn = connect(host=DB_INFO['DB_ADDR'], database=DB_INFO['DB_NAME'],
-                   user=DB_INFO['DB_USER'], password=DB_INFO['DB_PASS'])
-    cur = conn.cursor()
-    cur.execute(f'SELECT * FROM {table_name}')
-    fetch_items = cur.fetchall()
+    conn = connect(host=DB_INFO['host'], database=DB_INFO['database'],
+                   user=DB_INFO['user'], password=DB_INFO['password'])
+    # cur = conn.cursor()
+    # cur.execute(f'SELECT * FROM {table_name}')
+    # fetch_items = cur.fetchall()
+    # conn.close()
+    # t = len(columns_names)
+    # items = []
+    # for i in fetch_items:
+    #     id = dict()
+    #     for j in range(t):
+    #         id.update({columns_names[j]: i[j]})
+    #     items.append(id)
+    items = list(pd.read_sql(f'SELECT * FROM {table_name}', con=conn).to_dict('index').values())
     conn.close()
-    t = len(columns_names)
-    items = []
-    for i in fetch_items:
-        id = dict()
-        for j in range(t):
-            id.update({columns_names[j]: i[j]})
-        items.append(id)
-    return items, {i['id']: i for i in items}, {i['nome']: i for i in items}
+    return items, {item['id']: item for item in items}, {item['nome']: item for item in items}
 
 
 def get_base(item_endpoint, item_key, table_name, item_name):
-    conn = connect(host=DB_INFO['DB_ADDR'], database=DB_INFO['DB_NAME'],
-                   user=DB_INFO['DB_USER'], password=DB_INFO['DB_PASS'])
+    conn = connect(host=DB_INFO['host'], database=DB_INFO['database'],
+                   user=DB_INFO['user'], password=DB_INFO['password'])
     cur = conn.cursor()
     cur.execute(f'SELECT * FROM {table_name} WHERE {item_key} = {format_string_type(item_endpoint)}')
     fetch_item = list(cur.fetchone())
@@ -68,17 +73,19 @@ def get_base(item_endpoint, item_key, table_name, item_name):
     return fetch_item_dict, 200
 
 
-def post_base(item_endpoint, items, item_key, table_name, item_name):
+def post_base(item_endpoint, item_key, table_name, item_name):
     new_item = request.get_json()
+    conn = connect(host=DB_INFO['host'], database=DB_INFO['database'],
+                   user=DB_INFO['user'], password=DB_INFO['password'])
+    cur = conn.cursor()
+    items = list(pd.read_sql(f'SELECT * FROM {table_name}', con=conn).to_dict('index').values())
     if new_item[item_key] != item_endpoint:
         raise Exception(f"{item_key} incompatível com endpoint".capitalize())
-    for i in items:
-        if i[item_key] == item_endpoint:
+    for item in items:
+        print(item)
+        if item[item_key] == item_endpoint:
             return {'mensagem': f'{item_name} já cadastrado!'}, 400
     items.append(new_item)
-    conn = connect(host=DB_INFO['DB_ADDR'], database=DB_INFO['DB_NAME'],
-                   user=DB_INFO['DB_USER'], password=DB_INFO['DB_PASS'])
-    cur = conn.cursor()
     keys = '('
     values = '('
     for k, v in new_item.items():
@@ -98,8 +105,8 @@ def post_base(item_endpoint, items, item_key, table_name, item_name):
 
 def put_base(item_endpoint, item_key, table_name):
     new_item = request.get_json()
-    conn = connect(host=DB_INFO['DB_ADDR'], database=DB_INFO['DB_NAME'],
-                   user=DB_INFO['DB_USER'], password=DB_INFO['DB_PASS'])
+    conn = connect(host=DB_INFO['host'], database=DB_INFO['database'],
+                   user=DB_INFO['user'], password=DB_INFO['password'])
     cur = conn.cursor()
     cur.execute(f'SELECT * FROM {table_name} WHERE {item_key} = {format_string_type(item_endpoint)}')
     fetch_item = cur.fetchone()
@@ -133,8 +140,8 @@ def put_base(item_endpoint, item_key, table_name):
 
 
 def delete_base(item_endpoint, item_key, table_name):
-    conn = connect(host=DB_INFO['DB_ADDR'], database=DB_INFO['DB_NAME'],
-                   user=DB_INFO['DB_USER'], password=DB_INFO['DB_PASS'])
+    conn = connect(host=DB_INFO['host'], database=DB_INFO['database'],
+                   user=DB_INFO['user'], password=DB_INFO['password'])
     cur = conn.cursor()
     cur.execute(f'SELECT * FROM {table_name} WHERE {item_key} = {format_string_type(item_endpoint)}')
     fetch_item = cur.fetchone()
