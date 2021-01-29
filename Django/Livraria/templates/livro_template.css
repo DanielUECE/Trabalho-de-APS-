@@ -1,0 +1,178 @@
+
+
+
+/* Titulo do Livro */
+h1 .titulo{
+    position: absolute;
+    width: 1144px;
+    height: 79px;
+    left: 83px;
+    top: 195px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 54px;
+    line-height: 63px;
+
+    color: #b41515;
+}
+
+
+/* Capa */
+
+img .capa{
+    position: absolute;
+    width: 342px;
+    height: 437px;
+    left: 83px;
+    top: 350px;
+
+    background: #C4C4C4;
+}
+
+
+/* Autor */
+h2 .autor{
+    position: absolute;
+    width: 44px;
+    height: 21px;
+    left: 101px;
+    top: 274px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    /* identical to box height */
+}
+
+
+/* Sinopse */
+
+div .sinopse {
+    position: absolute;
+    width: 79px;
+    height: 26px;
+    left: 509px;
+    top: 557px;
+}
+
+div .sinopse p {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 26px;
+
+    color: #000000;
+}
+
+
+/* Estado 1 Preço */
+
+p .estado1 {
+    position: absolute;
+    width: 92px;
+    height: 52px;
+    left: 539px;
+    top: 396px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 26px;
+
+    color: #000000;
+}
+
+
+/* Estado 2 Preço */
+
+p .estado2{
+    position: absolute;
+    width: 92px;
+    height: 52px;
+    left: 686px;
+    top: 396px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 26px;
+
+    color: #000000;
+}
+
+
+/* Estado 3 Preço */
+
+p .estado3 {
+    position: absolute;
+    width: 92px;
+    height: 52px;
+    left: 833px;
+    top: 396px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 26px;
+
+    color: #000000;
+}    
+
+
+/* Comprar */
+
+div .comprar{
+    position: absolute;
+    width: 255px;
+    height: 100px;
+    left: 1100px;
+    top: 488px;
+
+    background: #ADD8E6;
+    color: #272;
+}
+
+
+/* Carrinho */
+
+div .carrinho {
+    position: absolute;
+    width: 255px;
+    height: 100px;
+    left: 1100px;
+    top: 623px;
+
+    background: #ADD8E6;
+    color: #272;
+}
+
+div .detalhes h2 {
+    position: absolute;
+    width: 267px;
+    height: 42px;
+    left: 101.33px;
+    top: 983px;
+    
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    
+    color: #000000;
+}
+
+div .detalhes li {
+    position: absolute;
+    width: 486.53px;
+    height: 394px;
+    left: 101px;
+    top: 983px;
+}

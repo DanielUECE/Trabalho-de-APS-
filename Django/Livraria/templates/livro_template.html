@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>COMPRA DE LIVROS</title>
+        <link rel="stylesheet" type="text/css" href="../templates/livro_template.css">
+    </head>
+    <body>
+
+        <h1 class="titulo"> {{livro['titulo']}}</h1>
+        <img src="/" class="capa">
+        <h2 class="autor">{{livro['autor']}}</h2>
+        <p class="estado1">estado1</p>
+        <p class="estado2">estado2</p>
+        <p class="estado3">estado3</p>
+        <div class="sinopse"></div>
+        <div class="comprar">Comprar</div>
+        <div class="carrinho">Adicionar ao carrinho</div>
+        <div class="detalhes">
+            <h2>Detalhes do livro</h2>
+            <li>
+                <ul>Titulo: {{livro['titulo']}}</ul>
+                <ul>Autor: {{livro['autor']}}</ul>
+                <ul>Ano da publicação original: {{livro['ano_publicacao_original']}}</ul>
+                <ul>Editora: {{livro['editora_id']}}</ul>
+                <ul>Edição: {{livro['edicao']}}</ul>
+                <ul>Ano da publicação da edição: {{livro['ano_publicacao_edicao']}}</ul>
+                <ul>Idioma: {{livro['idioma']}}</ul>
+                <ul>Gêneros: </ul>
+                <ul>Quantidade de páginas: {{livro['paginas']}}</ul>
+            </li>
+        </div>
+
+    </body>
+</html>

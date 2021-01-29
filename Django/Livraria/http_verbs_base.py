@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from flask import request, render_template
+from flask import request
 from psycopg2 import connect, extras
 from config import DB_INFO
 import pandas as pd
@@ -37,7 +37,7 @@ def get_columns(table_name):
     return columns_names, columns_types
 
 
-def mapping_base(table_name, columns_names):
+def mapping_base(table_name, columns_names=None):
     conn = connect(host=DB_INFO['host'], database=DB_INFO['database'],
                    user=DB_INFO['user'], password=DB_INFO['password'])
     # cur = conn.cursor()
@@ -53,7 +53,10 @@ def mapping_base(table_name, columns_names):
     #     items.append(id)
     items = list(pd.read_sql(f'SELECT * FROM {table_name}', con=conn).to_dict('index').values())
     conn.close()
-    return items, {item['id']: item for item in items}, {item['nome']: item for item in items}
+    try:
+        return items, {item['id']: item for item in items}, {item['nome']: item for item in items}
+    except KeyError:
+        return items, {item['id']: item for item in items}, {item['titulo']: item for item in items}
 
 
 def get_base(item_endpoint, item_key, table_name, item_name):
@@ -73,8 +76,11 @@ def get_base(item_endpoint, item_key, table_name, item_name):
     return fetch_item_dict, 200
 
 
-def post_base(item_endpoint, item_key, table_name, item_name):
-    new_item = request.get_json()
+def post_base(item_endpoint, item_key, table_name, item_name, data=None):
+    if data is None:
+        new_item = request.get_json()
+    else:
+        new_item = data
     conn = connect(host=DB_INFO['host'], database=DB_INFO['database'],
                    user=DB_INFO['user'], password=DB_INFO['password'])
     cur = conn.cursor()

@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+
+		<title>COMPRA DE LIVROS</title>
+		
+		<!-- jquery - link cdn -->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+		<!-- bootstrap - link cdn -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/estilo.css">
+	
+	</head>
+
+	<body>
+
+		<!-- Static navbar -->
+	    <nav class="navbar navbar-default navbar-static-top navbar-cor">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <img src="../imagens/imagem1.jpg" width=60%/>
+	        </div>
+	        
+	        <div id="navbar" class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="index.php"><h3>Voltar para o início</h3></a></li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+
+
+	    <div class="container">
+	    	
+	    	<br /><br />
+
+	    	<div class="col-md-4"></div>
+	    	<div class="col-md-4">
+	    		<h3>Cadastre-se já.</h3>
+	    		<br />
+				<!--<form method="post" action="../controllers/cadastroUsuarioController.php" id="formCadastrarse">-->
+				<form method="post" id="formCadastrarse">
+					<div class="form-group">
+						<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
+					</div>
+
+					<!--<div class="form-group">
+						<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nascimento" required>
+					</div>-->
+
+					<!--<div class="form-group">
+						<input type="text" class="form-control" id="curso" name="curso" placeholder="Curso" required>
+					</div> -->
+
+					
+
+					<div class="form-group">
+						<input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nascimento"  required>
+					</div>
+
+					<label for="estado"> Selecione o seu estado</label>
+
+					<select name="estado" id="estado">
+						<option value="Acre">Acre</option>
+						<option value="Amapá">Amapá</option>
+						<option value="Bahia">Bahia</option>
+						<option value="Ceará">Ceará</option>
+					</select>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="cidade" name="cidade" placeholder="Cidade" required>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairo" required>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Logradouro" required>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="numero" name="numero" placeholder="Número" required>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento">
+					</div>
+
+					<div class="form-group">
+						<input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+					</div>
+
+					<div class="form-group">
+						<input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+					</div>
+
+					<div class="form-group">
+						<input type="password" class="form-control" id="confirma-senha" name="confirma-senha" placeholder="Confirmar senha" required>
+					</div>
+
+					
+					
+					<button type="submit" name="btnCadastrar" class="btn btn-primary form-control">Inscreva-se</button>
+				</form>
+			</div>
+			<div class="col-md-4"></div>
+
+			<div class="clearfix"></div>
+			<br />
+			<div class="col-md-4"></div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4"></div>
+
+		</div>
+
+
+	
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	</body>
+
+
+	<!--<div class="form-group">
+						<select class="form-control" name="cursos" id="cursos">
+							<option value>Selecione seu Curso</option>
+							<option value="Pedagogia">Pedagogia</option>
+							<option value="Ciencia da Computacao">Ciencia da Computacao</option>
+							<option value="Fisica">Fisica</option>
+							<option value="Matematica">Matematica</option>
+							<option value="Geografia">Geografia</option>
+							<option value="Quimica">Quimica</option>
+							<option value="Historia">Historia</option>
+							<option value="Letras">Letras</option>
+							<option value="Filosofia">Filosofia</option>
+							<option value="Musica">Musica</option>
+							<option value="Psicologia">Psicologia</option>
+							<option value="Servico Social">Servico Social</option>
+							<option value="Administracao">Administracao</option>
+							<option value="Ciencias Contabeis">Ciencias Contabeis</option>
+							<option value="Nutricao">Nutricao</option>
+							<option value="Educacao Fisica">Educacao Fisica</option>
+							<option value="Medicina">Medicina</option>
+							<option value="Ciencias Biologicas">Ciencias Biologicas</option>
+							<option value="Enfermagem">Enfermagem</option>
+						</select>
+					</div>-->
+</html>

@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, Numeric, PrimaryKeyConstraint
-from sqlalchemy import ARRAY, DATE, PickleType, JSON, BLOB
+from sqlalchemy import Column, Integer, String, ForeignKey, Numeric, PrimaryKeyConstraint
+from sqlalchemy import ARRAY, DATE, PickleType, JSON, LargeBinary, TEXT
+from sqlalchemy.orm import relationship
 
 Base = declarative_base()
 
@@ -14,9 +15,9 @@ class Livro(Base):
 
     id = Column(Integer, primary_key=True)
     titulo = Column(String, nullable=False)
-    # ano_publicacao_original = Column(Integer, nullable=False)
+    ano_publicacao_original = Column(Integer, nullable=False)
     edicao = Column(Integer, nullable=False)
-    editora_id = Column(Integer, nullable=False)
+    editora_id = Column(Integer, ForeignKey('editoras.id'), nullable=False)
     ano_publicacao_edicao = Column(Integer, nullable=False)
     autores = Column(ARRAY(String), nullable=False)
     # idioma_original = Column(String, nullable=False)
@@ -29,9 +30,17 @@ class Livro(Base):
     preco = Column(Numeric(6, 2))
     paginas = Column(Integer)
     classificacao = Column(Numeric, default=0.0, nullable=False)
-    capa = Column(String)
-    capa_extra1 = Column(String)
-    capa_extra2 = Column(String)
+    capa = Column(LargeBinary, nullable=False)
+    capa_extra1 = Column(LargeBinary)
+    capa_extra2 = Column(LargeBinary)
+    sinopse = Column(TEXT)
+
+    # Relationships
+
+    # editora = relationship('Editora')
+    # tipo = relationship('Tipo')
+    # categoria = relationship('Categoria')
+    # estado = relationship('Estado')
 
 
 class Editora(Base):
@@ -40,9 +49,7 @@ class Editora(Base):
 
     id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
-    cidade = Column(String, nullable=False)
-    bairro = Column(String, nullable=False)
-    endereco = Column(String, nullable=False)
+    endereco = Column(JSON, nullable=False)
 
 
 class Autor(Base):
@@ -59,10 +66,8 @@ class Cliente(Base):
 
     id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
-    nascimento = Column(DATE, nullable=False)
-    cidade = Column(String, nullable=False)
-    bairro = Column(String, nullable=False)
-    endereco = Column(String, nullable=False)
+    data_nascimento = Column(DATE, nullable=False)
+    endereco = Column(JSON, nullable=False)
     email = Column(String, nullable=False)
     senha = Column(String, nullable=False)
     visualizados = Column(ARRAY(Integer))
@@ -74,7 +79,7 @@ class Administrador(Base):
 
     id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
-    nascimento = Column(DATE, nullable=False)
+    data_nascimento = Column(DATE, nullable=False)
     email = Column(String, nullable=False)
     senha = Column(String, nullable=False)
     nivel = Column(Integer, nullable=False)

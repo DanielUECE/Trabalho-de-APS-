@@ -44,16 +44,17 @@ def fill_estados():
 
 
 def fill_livros():
-    add(mod.Livro(titulo='Sapiens - Um breve resumo da história da Humanidade',  # ano_publicacao_original=2011,
-                  edicao=1,  # editora='LP&M',
-                  editora_id=1, ano_publicacao_edicao=2015, autores=['Yuval Noah Harari'],
-                  # idioma_original='Hebraico',
-                  idioma='Português', tipo_id=2, generos_id=None, estado_id=1))
-    add(mod.Livro(titulo='Homo Deus - Uma breve história do amanhã',  # ano_publicacao_original=2015,
-                  edicao=1,  # editora='Companhia das Letras',
-                  editora_id=2, ano_publicacao_edicao=2016, autores=['Yuval Noah Harari'],
-                  # idioma_original='Hebraico',
-                  idioma='Português', tipo_id=2, generos_id=None, estado_id=1))
+    # add(mod.Livro(titulo='Sapiens - Um breve resumo da história da Humanidade',  # ano_publicacao_original=2011,
+    #               edicao=1,  # editora='LP&M',
+    #               editora_id=1, ano_publicacao_edicao=2015, autores=['Yuval Noah Harari'],
+    #               # idioma_original='Hebraico',
+    #               idioma='Português', tipo_id=2, generos_id=None, estado_id=1))
+    # add(mod.Livro(titulo='Homo Deus - Uma breve história do amanhã',  # ano_publicacao_original=2015,
+    #               edicao=1,  # editora='Companhia das Letras',
+    #               editora_id=2, ano_publicacao_edicao=2016, autores=['Yuval Noah Harari'],
+    #               # idioma_original='Hebraico',
+    #               idioma='Português', tipo_id=2, generos_id=None, estado_id=1))
+    pass
 
 
 def create_tables():
